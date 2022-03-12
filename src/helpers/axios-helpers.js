@@ -1,7 +1,10 @@
+//configuración básica para axios.
 import Axios from "axios";
 import { deleteToken } from "./auth-helpers";
 
-const baseURL = "http://192.168.1.67:8000/api";
+//pude haberlo puesto en una variable de entorno :#
+const baseURL = "http://localhost:8000/api";
+
 let headers = {};
 
 if (localStorage.token) {
@@ -15,6 +18,7 @@ const axiosInstance = Axios.create({
 
 export default axiosInstance;
 
+//interceptar si hay un error 401 (token invalido)
 export function axiosInterceptors() {
   axiosInstance.interceptors.response.use(
     function (response) {
