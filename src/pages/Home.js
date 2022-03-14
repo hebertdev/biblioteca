@@ -5,31 +5,13 @@ import { bookList } from "../api/books";
 
 //components
 import AddBookButton from "../components/AddBookButton";
-import SearchBooksAlgolia from "../components/SearchBooksAlgolia";
 import SearchBooks from "../components/SearchBooks";
 
 import BookCard from "../components/BookCard/index";
 import SkeletonCard from "../components/BookCard/SkeletonCard";
 
 //material UI
-import {
-  Container,
-  Box,
-  Typography,
-  Grid,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  TextField,
-  Input,
-} from "@mui/material";
-
-import { LoadingButton } from "@mui/lab";
-
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { Container, Box, Typography, Grid, Button } from "@mui/material";
 
 export default function Home({ alertSms, user }) {
   const [books, setBooks] = useState(null);
@@ -66,17 +48,18 @@ export default function Home({ alertSms, user }) {
       <Typography variant="h4" sx={{ fontWeight: "600", marginBottom: "15px" }}>
         los libros que quieras
       </Typography>
-      {user?.is_manager && (
+      {user?.user?.is_manager && (
         <AddBookButton books={books} setBooks={setBooks} alertSms={alertSms} />
       )}
-      {/* 
-      
+
+      {/*
       <SearchBooksAlgolia
         deleteBookID={deleteBookID}
         alertSms={alertSms}
         setSearching={setSearching}
       />
       */}
+
       <SearchBooks
         deleteBookID={deleteBookID}
         alertSms={alertSms}
