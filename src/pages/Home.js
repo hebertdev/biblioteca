@@ -5,6 +5,7 @@ import { bookList } from "../api/books";
 
 //components
 import AddBookButton from "../components/AddBookButton";
+import SearchBooksAlgolia from "../components/SearchBooksAlgolia";
 import SearchBooks from "../components/SearchBooks";
 
 import BookCard from "../components/BookCard/index";
@@ -68,6 +69,14 @@ export default function Home({ alertSms, user }) {
       {user?.is_manager && (
         <AddBookButton books={books} setBooks={setBooks} alertSms={alertSms} />
       )}
+      {/* 
+      
+      <SearchBooksAlgolia
+        deleteBookID={deleteBookID}
+        alertSms={alertSms}
+        setSearching={setSearching}
+      />
+      */}
       <SearchBooks
         deleteBookID={deleteBookID}
         alertSms={alertSms}

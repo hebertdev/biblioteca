@@ -63,7 +63,7 @@ function App() {
       theme.palette.mode === "light"
         ? "#f5f5f5"
         : theme.palette.background.default;
-  }, [theme.palette.background.default]);
+  }, [theme.palette.background.default, theme.palette.mode]);
 
   return (
     <Box

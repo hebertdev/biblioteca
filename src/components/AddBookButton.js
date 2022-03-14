@@ -92,7 +92,7 @@ export default function AddBookButton({ books, setBooks, alertSms }) {
         title: "",
         author: "",
         edition: "",
-        publication_date: "",
+        publication_date: `2022-01-01`,
         quantity: "",
         cover: "",
       });

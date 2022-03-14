@@ -21,6 +21,6 @@ export async function deleteBook(id) {
 }
 
 export async function searchBooks(query) {
-  const { data } = await axiosInstance.get(`/books/?q=${query}`);
+  const { data } = await axiosInstance.get(`/books/?search=${query}`);
   return data;
 }

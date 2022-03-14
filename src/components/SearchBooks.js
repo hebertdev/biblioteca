@@ -1,65 +1,67 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, ref, useRef } from "react";
 
 //axios helpers
 import axiosInstance from "../helpers/axios-helpers";
 
-//algolia
-import { createAutocomplete } from "@algolia/autocomplete-core";
+//api books
+import { searchBooks } from "../api/books";
 
 //components
 import BookCard from "./BookCard/index";
+import SkeletonCard from "./BookCard/SkeletonCard";
 
 //material UI
-import { Box, Grid, TextField } from "@mui/material";
+import { Box, Grid, TextField, Typography } from "@mui/material";
 
 export default function SearchBooks(props) {
   const { alertSms, deleteBookID, setSearching } = props;
+  const [queryText, setQueryText] = useState("");
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [resultBooks, setResultBooks] = useState(null);
 
-  const [autoCompleteState, setAutoCompleteState] = useState({
-    collections: [],
-    isOpen: false,
-  });
+  function handleQueryText(e) {
+    setQueryText(e.target.value);
+    if (e.target.value.length === 0) {
+      setSearching(false);
+      setResultBooks(null);
+    }
+  }
 
-  const autoComplete = useMemo(
-    () =>
-      createAutocomplete({
-        placeholder: "Buscar libros",
-        onStateChange: ({ state }) => setAutoCompleteState(state),
-        getSources: () => [
-          {
-            sourceId: "offfer-next-api",
-            getItems: ({ query }) => {
-              if (!!query) {
-                return axiosInstance
-                  .get(`/books/?search=${query}`)
-                  .then((res) => res.data.results);
-              } else {
-                console.log("no query");
-                return [];
-              }
-            },
-          },
-        ],
-        ...props,
-      }),
-    [props]
-  );
+  let inputText = useRef(null);
 
-  const formRef = useRef(null);
-  const inputRef = useRef(null);
-  const panelRef = useRef(null);
+  async function handleSearch(e) {
+    e.preventDefault();
 
-  const formProps = autoComplete.getFormProps({
-    inputElement: inputRef.current,
-  });
+    if (queryText.length < 1) {
+      return null;
+    }
 
-  const inputProps = autoComplete.getInputProps({
-    inputElement: inputRef.current,
-  });
+    if (loading) {
+      return null;
+    }
+
+    try {
+      setLoading(true);
+      const data = await searchBooks(queryText);
+      setResultBooks(data.results);
+      console.log(data);
+      setSearching(true);
+      setLoading(false);
+      setQuery(queryText);
+
+      //focus of input
+      document.getElementById("outlined-basic").blur();
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  }
+  let n = 4;
 
   return (
     <Box>
-      <Box component={"form"} ref={formRef} {...formProps}>
+      <Box component={"form"} onSubmit={handleSearch}>
         <TextField
           label="Buscar libros"
           variant="outlined"
@@ -67,33 +69,33 @@ export default function SearchBooks(props) {
           fullWidth
           name="title"
           sx={{ display: "block", width: "100%", marginBottom: "20px" }}
-          ref={inputRef}
-          {...inputProps}
+          onChange={handleQueryText}
+          value={queryText}
+          ref={inputText}
+          id="outlined-basic"
         />
       </Box>
-      {autoCompleteState.isOpen && (
-        <Box ref={panelRef} {...autoComplete.getPanelProps()}>
-          {autoCompleteState.collections.map((collection, index) => {
-            const { items } = collection;
-            return (
-              <Box key={`section-${index}`} sx={{ marginBottom: "10px" }}>
-                {items.length > 0 && (
-                  <Grid container spacing={1} {...autoComplete.getListProps()}>
-                    {items.map((book) => (
-                      <BookCard
-                        key={book.id}
-                        book={book}
-                        deleteBookID={deleteBookID}
-                        alertSms={alertSms}
-                      />
-                    ))}
-                  </Grid>
-                )}
-              </Box>
-            );
-          })}
-        </Box>
-      )}
+
+      <Box>
+        <Grid container spacing={1}>
+          {loading && [...Array(n)].map((e, i) => <SkeletonCard key={i} />)}
+          {resultBooks?.length === 0 && loading === false && (
+            <Box sx={{ width: "80%", margin: "auto" }}>
+              <Typography variant="h3">
+                No se encontraron resultados para {query}
+              </Typography>
+            </Box>
+          )}
+          {resultBooks?.map((book) => (
+            <BookCard
+              key={book.id}
+              book={book}
+              deleteBookID={deleteBookID}
+              alertSms={alertSms}
+            />
+          ))}
+        </Grid>
+      </Box>
     </Box>
   );
 }
