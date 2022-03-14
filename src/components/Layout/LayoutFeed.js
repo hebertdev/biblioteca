@@ -8,14 +8,13 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  TextField,
   Hidden,
 } from "@mui/material";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import CoPresentOutlinedIcon from "@mui/icons-material/CoPresentOutlined";
-import { yellow, indigo } from "@mui/material/colors";
+
+import { indigo } from "@mui/material/colors";
 
 //layout que envuele a toda la pagina y que contiene el menu de navegacion
 //cuando el usuario a iniciado sesión

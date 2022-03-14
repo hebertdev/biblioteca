@@ -196,6 +196,7 @@ export default function AddBookButton({ books, setBooks, alertSms }) {
 
             <img
               src=""
+              alt="."
               ref={previewNewCover}
               style={{
                 display: "block",

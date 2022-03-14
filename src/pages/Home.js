@@ -21,6 +21,7 @@ export default function Home({ alertSms, user }) {
 
   useEffect(() => {
     getBooks();
+    // eslint-disable-next-line
   }, []);
 
   async function getBooks() {

@@ -29,6 +29,7 @@ export default function Header({ setUser, logout, colorMode, theme, mode }) {
       loadUser();
     }
     return null;
+    // eslint-disable-next-line
   }, []);
 
   async function loadUser() {

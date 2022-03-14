@@ -4,7 +4,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 //helpers
-import axiosInstance, { urlImage } from "../../helpers/axios-helpers";
+import axiosInstance from "../../helpers/axios-helpers";
 import { setToken } from "../../helpers/auth-helpers";
 
 //material UI

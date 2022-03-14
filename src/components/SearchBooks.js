@@ -1,7 +1,4 @@
-import { useState, ref, useRef } from "react";
-
-//axios helpers
-import axiosInstance from "../helpers/axios-helpers";
+import { useState, useRef } from "react";
 
 //api books
 import { searchBooks } from "../api/books";

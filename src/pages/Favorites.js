@@ -1,8 +1,5 @@
 //material UI
-import { Container, Box, Typography, Grid } from "@mui/material";
-
-//components
-import BookCard from "../components/BookCard/index";
+import { Container, Box, Typography } from "@mui/material";
 
 export default function Favorites() {
   return (

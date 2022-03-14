@@ -59,11 +59,15 @@ export default function BookActions({
       />
       {isAdmin ? (
         <>
-          <DeleteButton
-            book={book}
-            deleteBookID={deleteBookID}
-            alertSms={alertSms}
-          />
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <FavoriteBorderOutlinedIcon color="primary" />
+
+            <DeleteButton
+              book={book}
+              deleteBookID={deleteBookID}
+              alertSms={alertSms}
+            />
+          </Box>
         </>
       ) : (
         <IconButton aria-label="add to favorites" color="primary">
@@ -148,7 +152,7 @@ function AdminActions({ handleCloseModal, book, setBook, alertSms }) {
     } else {
       setIsModified(false);
     }
-  }, [currentBook]);
+  }, [currentBook, book]);
 
   let inputCover = useRef(null);
   let previewCover = useRef(null);
@@ -285,6 +289,7 @@ function AdminActions({ handleCloseModal, book, setBook, alertSms }) {
           <img
             src=""
             ref={previewCover}
+            alt="."
             style={{ display: "block", maxWidth: "250px", margin: "20px auto" }}
           />
           {newCover && (
