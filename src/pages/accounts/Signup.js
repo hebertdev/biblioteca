@@ -302,31 +302,6 @@ export default function SignUp({ alertSms }) {
           </Grid>
         </Box>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
     </Container>
-  );
-}
-
-function Copyright(props) {
-  return (
-    <>
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        align="center"
-        {...props}
-      >
-        {"Copyright © "}
-        <Link color="inherit" href="#">
-          Betsocial
-        </Link>{" "}
-        {new Date().getFullYear()}
-        {"."}
-      </Typography>
-
-      <br />
-      <br />
-      <br />
-    </>
   );
 }

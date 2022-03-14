@@ -192,25 +192,6 @@ export default function Login({ alertSms }) {
           </Grid>
         </Box>
       </Box>
-      <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
-  );
-}
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="#">
-        Library
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
   );
 }
