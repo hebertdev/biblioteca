@@ -16,5 +16,6 @@ $ npm build
 ```
 
 > esta construida en react , con material UI
+> PARA INTERACTUAR CON EL CRUD DEBE ACTIVARSE COMO ADMINISTRADOR DESDE EL BACKEND
 
-> #### [DEMO DE LA APLICACIÓN](https://biblioteca1.vercel.app/)
+> #### [DEMO DE LA APLICACIÓN](https://bibliotecadev.vercel.app/)
