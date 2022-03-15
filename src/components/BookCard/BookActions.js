@@ -194,7 +194,7 @@ function AdminActions({ handleCloseModal, book, setBook, alertSms }) {
 
       newData.append("title", currentBook.title);
       newData.append("author", currentBook.author);
-      newData.append("description", currentBook.description);
+      newData.append("edition", currentBook.edition);
       newData.append("quantity", currentBook.quantity);
       newData.append("publication_date", currentBook.publication_date);
       if (newCover) newData.append("cover", newCover);
