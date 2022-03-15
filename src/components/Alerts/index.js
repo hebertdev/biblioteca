@@ -22,14 +22,27 @@ export default function AlertApp({
   const { vertical, horizontal, open } = state;
 
   return (
-    <Container disableGutters>
+    <>
       {type ? (
-        <Snackbar
-          sx={{ width: "100%" }}
-          open={open}
-          anchorOrigin={{ vertical, horizontal }}
-          key={vertical + horizontal}
-        >
+        <>
+          <Snackbar
+            open={open}
+            anchorOrigin={{ vertical, horizontal }}
+            key={vertical + horizontal}
+          >
+            <Alert
+              variant="filled"
+              onClose={() => {
+                closeAlertSms();
+              }}
+              severity={typeAlert}
+            >
+              {AlertaMensaje}
+            </Alert>
+          </Snackbar>
+        </>
+      ) : (
+        <Container disableGutters>
           <Alert
             variant="filled"
             onClose={() => {
@@ -39,18 +52,8 @@ export default function AlertApp({
           >
             {AlertaMensaje}
           </Alert>
-        </Snackbar>
-      ) : (
-        <Alert
-          variant="filled"
-          onClose={() => {
-            closeAlertSms();
-          }}
-          severity={typeAlert}
-        >
-          {AlertaMensaje}
-        </Alert>
+        </Container>
       )}
-    </Container>
+    </>
   );
 }

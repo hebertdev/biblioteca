@@ -5,13 +5,15 @@ import { editBook } from "../../api/books";
 
 //components
 import DeleteButton from "./DeleteButton";
+import LikeButton from "./LikeButton";
 
+//helpers img
+import { modifiedUrlImage } from "../../helpers/axios-helpers";
 //material UI
 import {
   Box,
   CardActions,
   Button,
-  IconButton,
   Dialog,
   DialogActions,
   DialogContent,
@@ -24,7 +26,6 @@ import { LoadingButton } from "@mui/lab";
 import { styled } from "@mui/material/styles";
 
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
 export default function BookActions({
   book,
@@ -36,6 +37,7 @@ export default function BookActions({
   // eslint-disable-next-line
   const [isAdmin, setIsAdmin] = useState(user.user.is_manager);
   const [openModal, setOpenModal] = useState(false);
+  const [isLike, setIsLike] = useState(book.is_like);
   const handleOpenModal = () => {
     setOpenModal(true);
   };
@@ -46,9 +48,11 @@ export default function BookActions({
 
   return (
     <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-      <Button variant="outlined" onClick={handleOpenModal}>
-        {isAdmin ? "Modificar" : "reservar"}
-      </Button>
+      {isAdmin && (
+        <Button variant="outlined" onClick={handleOpenModal}>
+          Modificar
+        </Button>
+      )}
       <ActionsModal
         openModal={openModal}
         handleCloseModal={handleCloseModal}
@@ -60,7 +64,7 @@ export default function BookActions({
       {isAdmin ? (
         <>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <FavoriteBorderOutlinedIcon color="primary" />
+            <LikeButton book={book} isLike={isLike} setIsLike={setIsLike} />
 
             <DeleteButton
               book={book}
@@ -70,9 +74,7 @@ export default function BookActions({
           </Box>
         </>
       ) : (
-        <IconButton aria-label="add to favorites" color="primary">
-          <FavoriteBorderOutlinedIcon />
-        </IconButton>
+        <LikeButton book={book} isLike={isLike} setIsLike={setIsLike} />
       )}
     </CardActions>
   );
@@ -287,7 +289,7 @@ function AdminActions({ handleCloseModal, book, setBook, alertSms }) {
           </label>
 
           <img
-            src=""
+            src={modifiedUrlImage(book.cover)}
             ref={previewCover}
             alt="."
             style={{ display: "block", maxWidth: "250px", margin: "20px auto" }}

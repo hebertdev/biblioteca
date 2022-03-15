@@ -44,12 +44,12 @@ export default function LayoutFeed({ user, children }) {
   );
 }
 
-export function ListMenuLeft({ user, setOpenModalRight }) {
+export function ListMenuLeft({ user, setOpenMenuLeft }) {
   function closeModal() {
-    if (!setOpenModalRight) {
+    if (!setOpenMenuLeft) {
       return null;
     } else {
-      setOpenModalRight(false);
+      setOpenMenuLeft(false);
     }
   }
 

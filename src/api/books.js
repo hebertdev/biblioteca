@@ -10,6 +10,11 @@ export async function bookList(url) {
   return data;
 }
 
+export async function getFavorites() {
+  const { data } = await axiosInstance.get("/books/favorite_books/");
+  return data;
+}
+
 export async function editBook(id, book) {
   const { data } = await axiosInstance.patch(`/books/${id}/edit_book/`, book);
   return data;
@@ -22,5 +27,9 @@ export async function deleteBook(id) {
 
 export async function searchBooks(query) {
   const { data } = await axiosInstance.get(`/books/?search=${query}`);
+  return data;
+}
+export async function toggleLike(id) {
+  const { data } = await axiosInstance.post(`/books/${id}/likes/`);
   return data;
 }

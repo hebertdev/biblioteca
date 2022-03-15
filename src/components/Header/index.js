@@ -9,6 +9,9 @@ import { whoami } from "../../api/user";
 //helpers
 import { getToken } from "../../helpers/auth-helpers";
 
+//components
+import ButtonMenuLeft from "./ButtonMenuLeft";
+
 //Material UI
 import {
   Box,
@@ -58,6 +61,8 @@ export default function Header({ setUser, logout, colorMode, theme, mode }) {
       >
         <Container disableGutters sx={{ padding: "0 5px" }}>
           <Toolbar disableGutters variant="dense">
+            <ButtonMenuLeft />
+
             <Box sx={{ flexGrow: 1 }}>
               <Typography
                 variant="h5"
