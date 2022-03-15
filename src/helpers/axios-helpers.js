@@ -3,7 +3,7 @@ import Axios from "axios";
 import { deleteToken } from "./auth-helpers";
 
 //pude haberlo puesto en una variable de entorno :#
-const baseURL = "http://192.168.1.67:8000/api";
+const baseURL = process.env.REACT_APP_API_URL;
 
 let headers = {};
 
