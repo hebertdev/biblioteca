@@ -43,33 +43,37 @@ export default function AppRoutes(props) {
 function LoginRoutes(props) {
   const { mode, colorMode, theme, user, alertSms } = props;
   return (
-    <LayoutFeed user={user}>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              mode={mode}
-              colorMode={colorMode}
-              theme={theme}
-              alertSms={alertSms}
-              user={user}
+    <>
+      {user && (
+        <LayoutFeed user={user}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  mode={mode}
+                  colorMode={colorMode}
+                  theme={theme}
+                  alertSms={alertSms}
+                  user={user}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/favorites"
-          element={
-            <Favorites
-              mode={mode}
-              colorMode={colorMode}
-              theme={theme}
-              alertSms={alertSms}
+            <Route
+              path="/favorites"
+              element={
+                <Favorites
+                  mode={mode}
+                  colorMode={colorMode}
+                  theme={theme}
+                  alertSms={alertSms}
+                />
+              }
             />
-          }
-        />
-      </Routes>
-    </LayoutFeed>
+          </Routes>
+        </LayoutFeed>
+      )}
+    </>
   );
 }
 
